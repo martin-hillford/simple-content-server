@@ -27,7 +27,7 @@ RUN mkdir -p /data/www \
  && chown sftpuser:sftponly /data/www && chmod 755 /data/www
 
 # OpenSSH config (SFTP-only + chroot to /data)
-COPY sshd_config /etc/sshd/sshd_config_template
+COPY sshd_config /defaults/sshd_config
 COPY nginx.conf /etc/nginx/nginx.template
 
 # Supervisor to run both daemons in one container

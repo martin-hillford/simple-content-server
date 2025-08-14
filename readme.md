@@ -7,12 +7,13 @@ By default, NGINX runs on port 8080 and SSH on port 2222, but these can be confi
 docker run -p 2222:2222 -p 8080:8080 \
     -e SSH_PORT=2221 \
     -e HTTP_PORT=8080 \
+    -e AUTHORIZED_KEYS="ssh-ed25519 AAAACVNzaC1lZDI1NTE5AAAAIGxdiqataU6wsDsgLMRlFCqPFaJfO0GxwUTthOOmAHqt" \ 
     -v data:/data \
-    -v sshkeys:/etc/ssh \
-    -v ./authorized_keys:/home/sftpuser/.ssh/authorized_keys:ro \
-    martinhillford/simple-content-server
+    docker.io/martinhillford/simple-content-server
 ```
 
-To ensure data persistence, bind a volume to `/data`. Additionally, persist `/etc/ssh` to avoid key mismatch errors.
+To ensure data persistence, bind a volume to `/data`.
 
-The `-v ./authorized_keys:/home/sftpuser/.ssh/authorized_keys:ro` mount ensures users can connect via SSH using their public keys, enabling secure, password-less authentication.
+To get access to the sever inject the allowed public key(s) via the environment variable `AUTHORIZED_KEYS`.
+this variable can take multiple keys if they are separated by |. It is now possible to login with the user 
+`sftpuser` and the provided key.
