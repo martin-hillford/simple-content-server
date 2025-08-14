@@ -1,0 +1,24 @@
+# Minimal, hardened-ish sshd for SFTP-only users
+Port ${SSH_PORT}
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+
+# Auth: prefer keys. Flip to yes only if you really want passwords.
+PasswordAuthentication no
+PubkeyAuthentication yes
+PermitRootLogin no
+ChallengeResponseAuthentication no
+UsePAM no
+
+# SFTP subsystem and default deny for features we don't need
+Subsystem sftp internal-sftp
+
+# Lock down SFTP-only users and chroot them to /data
+Match Group sftponly
+    ChrootDirectory /data
+    ForceCommand internal-sftp
+    X11Forwarding no
+    AllowTcpForwarding no
+    PermitTunnel no
+    GatewayPorts no

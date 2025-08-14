@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  sftp_nginx:
+    build: .
+    ports:
+      - "22:22"
+      - "80:80"
+    volumes:
+      - data:/data
+      - sshkeys:/etc/ssh         # persist host keys so clients don't see them change
+      - ./authorized_keys:/home/sftpuser/.ssh/authorized_keys:ro
+volumes:
+  data:
+  sshkeys:
