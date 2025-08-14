@@ -2,7 +2,7 @@ FROM debian:bookworm-slim
 
 # Base
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openssh-server nginx supervisor ca-certificates gettext \
+    openssh-server nginx supervisor ca-certificates gettext passwd openssl \
     libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static \
   && rm -rf /var/lib/apt/lists/*
 

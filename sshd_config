@@ -9,6 +9,7 @@ PasswordAuthentication no
 PubkeyAuthentication yes
 PermitRootLogin no
 ChallengeResponseAuthentication no
+PasswordAuthentication no
 UsePAM no
 
 # SFTP subsystem and default deny for features we don't need
